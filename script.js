@@ -1,7 +1,7 @@
 let items = document.querySelector(".items");
 let addedCartItems = document.querySelector(".addedCartItems");
 let note = document.querySelector("#note");
-let num =0;
+let num = 0;
 
 const arr = [
   {
@@ -41,74 +41,67 @@ arr.forEach((elem, i) => {
 // items.appendChild(item)
 items.innerHTML = item;
 
-
 let addeddNumber = document.querySelector("#addeddNumber");
 let adToCart = document.querySelectorAll(".add");
-const notes = ()=>{
-  if(addedCartItems.children.length>1){
-    note.innerHTML=""
+const notes = () => {
+  if (addedCartItems.children.length > 1) {
+    note.innerHTML = "";
+  } else {
+    note.innerHTML = "No any Item Added in Cart Yet";
   }
-  else{
-    note.innerHTML="No any Item Added in Cart Yet"
-  }
-  }
+};
 
-
-// TOGGLE PLUS MINUS 
-let plusMinus ="";
-const togglePlusMinus = (e)=>{
-  if(e.textContent === '+'){
-    e.textContent= "-"
-    num+=1;
-    addeddNumber.innerHTML=num;
+// TOGGLE PLUS MINUS
+let plusMinus = "";
+const togglePlusMinus = (e) => {
+  if (e.textContent === "+") {
+    e.textContent = "-";
+    num += 1;
+    addeddNumber.innerHTML = num;
     // console.log()
-    addToCart(e.parentElement.parentElement) //Show in Cart function called 
-    notes()
-    }
-  else{
-    e.textContent= "+"
-    num-=1;
-    addeddNumber.innerHTML=num;
-    removeFromCart(e.parentElement.parentElement.id)
-    notes()
+    addToCart(e.parentElement.parentElement); //Show in Cart function called
+    notes();
+  } else {
+    e.textContent = "+";
+    num -= 1;
+    addeddNumber.innerHTML = num;
+    removeFromCart(e.parentElement.parentElement.id);
+    notes();
   }
-}
-
+};
 
 // WHEN CLICK ON ADD TO CART "+"
-adToCart.forEach((elem, index)=>{
+adToCart.forEach((elem, index) => {
   elem.addEventListener("click", (e) => {
     // console.log(e.target.parentElement.parentElement)
-    togglePlusMinus(e.target) //toggle "+", "-" when click on addToCart    
+    togglePlusMinus(e.target); //toggle "+", "-" when click on addToCart
   });
-  
+});
+
+// WHEN CLICK ON" + " ADD ITEMS IN CART AND SHOW IT
+const addToCart = (e) => {
+  // Clone the original element
+  const clonedElement = e.cloneNode(true);
+  // Append the cloned element to the new location
+  addedCartItems.appendChild(clonedElement);
+};
+
+const removeFromCart = (e) => {
+  let cartItemsToBeRemoved = document.querySelectorAll(".addedCartItems .box");
+  //"cartItemsToBeRemoved" is nodelist, not an array. Filter method only works on array so,
+
+  const cartItemsArray = Array.from(cartItemsToBeRemoved);
+  // I converted it into an array. "cartItemsArray" is an array now and filter method can be used on it
+
+  let filteredTobeDelete = cartItemsArray.filter((elem) => {
+    if (elem.id == e) {
+      //Checks which element should to be removed from cart
+      elem.remove();
+    }
+  });
+};
+
+document.querySelector(".circle").addEventListener("click",()=>{
+  // alert('Please login first!');
+  addedCartItems.classList.toggle('top')
 })
-
-
-
-
-
-
-// WHEN CLICK ON" + " ADD ITEMS IN CART AND SHOW IT 
-const addToCart =(e)=>{
-// Clone the original element
-const clonedElement = e.cloneNode(true);
-// Append the cloned element to the new location
-addedCartItems.appendChild(clonedElement);  
-}
-
-const removeFromCart =(e)=>{
-let cartItemsToBeRemoved = document.querySelectorAll(".addedCartItems .box")
-//"cartItemsToBeRemoved" is nodelist, not an array. Filter method only works on array so,
-
-const cartItemsArray = Array.from(cartItemsToBeRemoved);
-// I converted it into an array. "cartItemsArray" is an array now and filter method can be used on it 
-
-let filteredTobeDelete= cartItemsArray.filter((elem)=>{
-if(elem.id==e){   //Checks which element should to be removed from cart
-elem.remove()
-}
-})
-}
-
-

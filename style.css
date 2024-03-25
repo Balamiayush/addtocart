@@ -145,7 +145,14 @@ box-shadow:  20px 20px 60px #bebebe,
              flex-wrap: wrap;
              justify-content: space-evenly;
     align-items: center;
+    /* display: none; */
+    position: absolute;
+    transition: 0.4s ease-out;
+  }
+  .top{
+    top: -90%;
 }
+
 #note{
   color: black;
   display: block;
